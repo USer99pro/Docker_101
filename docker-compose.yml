@@ -1,0 +1,18 @@
+networks:
+  web_network:
+    name: web_network
+    driver: bridge
+
+services:
+  nginx:
+  # Pull image จาก Docker Hub
+    image: nginx:stable-alpine
+    container_name: static_web_container
+    # กำหนด Volume ที่เชื่อมกับ Container
+    volumes:
+      - ./static-html:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    networks:
+      - web_network
+    restart: always
